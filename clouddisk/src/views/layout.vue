@@ -59,8 +59,12 @@
 			<Content class="bg-white">主内容</Content>
 		</Layout>
 		<Footer class="bg-white d-flex p-0 ">
-			<div class="bg-light footer-left">
-				空间容量信息
+			<div class="footer-left px-3">
+				<Progress  :percent="90" :stroke-color="['#108ee9', '#87d068']" hide-info/>
+				<div class="d-flex mt-2 justify-content-between">
+					<small>总共: 100GB</small>
+					<small class="text-warning">已用: 90GB</small>
+				</div>
 			</div>
 			<div>分页</div>
 		</Footer>
@@ -100,12 +104,19 @@
 </script>
 
 <style scoped="scoped">
+	.footer-left /deep/ .ivu-progress-inner {
+	    background: #fff!important;
+	    border: 1px solid #eee!important;
+	}
+	
 	.layout {
 		height: 100%;
 	}
 
 	.footer-left {
 		width: 200px;
+		background-color: #ebf0f1;
+		height: 55px;
 	}
 
 	.layout-logo {
@@ -120,4 +131,5 @@
 	.sider,.sider-menu{
 		background-color: #ebf0f1;
 	}
+	
 </style>
