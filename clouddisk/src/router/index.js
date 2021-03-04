@@ -6,14 +6,20 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/login.vue")
+    component: () => import( "../views/login.vue")
   },
   {
     path: "/",
+	redirect : "/index",
     name: "layout",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/layout.vue")
+    component: () => import("../views/layout.vue"),
+	children : [
+		{
+			path : "/index",
+			name : "index",
+			component: () => import("../views/index.vue")
+		}
+	]
   }
 ];
 
