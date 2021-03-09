@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="index-top bg-white border-bottom px-3">
+		<div class="index-top bg-white border-bottom px-3 ">
 			<div class="d-flex top-button align-items-center">
 				<Button type="primary" icon="ios-search" class="mr-2">上传</Button>
 				<Button icon="ios-search" class="mr-2">新建文件夹</Button>
@@ -16,35 +16,7 @@
 		</div>
 
 		<div class="index-list">
-			<div class="border-bottom px-3 py-2">
-				<Row>
-					<Col span="12" class="d-flex align-items-center">
-					<Checkbox size="small" class="mb-0 mr-3"></Checkbox>
-					<i class="iconfont icon-file-b-2 text-warning mr-3" style="font-size:28px"></i>
-					<small>我的目录</small>
-					<div class="ml-auto text-primary">
-						<Tooltip content="分享" placement="bottom">
-							<Icon type="md-share" size="18" class="mx-2 icon" />
-						</Tooltip>
-						<Tooltip content="下载" placement="bottom">
-							<Icon type="md-cloud-download" size="18" class="mx-2 icon" />
-						</Tooltip>
-
-						<Dropdown>							
-							<Icon type="ios-more" size="18" class="mx-2 icon" />
-							<DropdownMenu slot="list">
-								<DropdownItem>重命名</DropdownItem>
-								<DropdownItem>删除</DropdownItem>
-							</DropdownMenu>
-						</Dropdown>
-
-
-					</div>
-					</Col>
-					<Col span="6" class="d-flex align-items-center">-</Col>
-					<Col span="6" class="d-flex align-items-center"><small class="text-secondary">2021-03-04 15:00:01</small></Col>
-				</Row>
-			</div>
+			<media-list v-for="(item,index) in list" :item="item" :index="index" :key="index"></media-list>
 		</div>
 
 		<div class="index-page d-flex align-items-center px-3 border-top">
@@ -54,6 +26,83 @@
 </template>
 
 <script>
+	import mediaList from "../components/media-list.vue"
+	export default {
+		components: {
+			mediaList
+		},
+		data() {
+			return {
+				list: [{
+					type: "dir",
+					name: "我的笔记",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}, {
+					type: "dir",
+					name: "我的备份",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}, {
+					type: "dir",
+					name: "相册管理",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}, {
+					type: "dir",
+					name: "我的资源",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}, {
+					type: "image",
+					name: "风景.jpg",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/Appstatic/qsbk/demo/datapic/1.jpg"
+				}, {
+					type: "image",
+					name: "海报.jpg",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/Appstatic/qsbk/demo/datapic/2.jpg"
+				}, {
+					type: "video",
+					name: "uniapp实战社区交友教程.mp4",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://douyinzcmcss.oss-cn-shenzhen.aliyuncs.com/%E8%AF%BE%E6%97%B61.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.mp4"
+				}, {
+					type: "video",
+					name: "uniapp实战商城教程.mp4",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://douyinzcmcss.oss-cn-shenzhen.aliyuncs.com/%E8%AF%BE%E6%97%B61.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.mp4"
+				}, {
+					type: "video",
+					name: "uniapp实战仿微信教程.mp4",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://douyinzcmcss.oss-cn-shenzhen.aliyuncs.com/%E8%AF%BE%E6%97%B61.%20%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D.mp4"
+				}, {
+					type: "image",
+					name: "摄影.jpg",
+					create_time: "2019-12-15 08:00",
+					checked: false,
+					url: "https://tangzhe123-com.oss-cn-shenzhen.aliyuncs.com/Appstatic/qsbk/demo/datapic/3.jpg"
+				}, {
+					type: "text",
+					name: "记事本.txt",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}, {
+					type: "none",
+					name: "压缩包.rar",
+					create_time: "2019-12-15 08:00",
+					checked: false
+				}]
+			}
+		}
+	}
 </script>
 
 <style scoped="scoped">
@@ -93,8 +142,8 @@
 	.top-select {
 		height: 40px;
 	}
-	
-	.icon{
+
+	.icon {
 		cursor: pointer;
 	}
 </style>
