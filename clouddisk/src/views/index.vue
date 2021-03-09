@@ -16,7 +16,7 @@
 		</div>
 
 		<div class="index-list">
-			<media-list v-for="(item,index) in list" :item="item" :index="index" :key="index"></media-list>
+			<media-list @on-event="handleEvent" v-for="(item,index) in list" :item="item" :index="index" :key="index"></media-list>
 		</div>
 
 		<div class="index-page d-flex align-items-center px-3 border-top">
@@ -101,7 +101,20 @@
 					checked: false
 				}]
 			}
+		},
+		methods : {
+			handleEvent(e){
+				switch(e.type){
+					case "delete" :
+						this.list.splice(e.index,1);
+						this.$Message.success("删除成功")
+						break;
+					default :
+						break;
+				}
+			}
 		}
+		
 	}
 </script>
 
