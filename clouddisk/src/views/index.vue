@@ -4,10 +4,10 @@
 			<div class="d-flex top-button align-items-center">
 				<Button type="primary" icon="ios-search" class="mr-2">上传</Button>
 				<Button icon="ios-search" class="mr-2">新建文件夹</Button>
-				<Button icon="ios-search" class="mr-2">下载</Button>
-				<Button icon="ios-search" class="mr-2">分享</Button>
-				<Button icon="ios-search" class="mr-2">重命名</Button>
-				<Button icon="ios-search" class="mr-2">删除</Button>
+				<Button icon="ios-search" v-if="checkedCount" class="mr-2">下载</Button>
+				<Button icon="ios-search" v-if="checkedCount == 1" class="mr-2">分享</Button>
+				<Button icon="ios-search" @click="rename(false)" v-if="checkedCount == 1" class="mr-2">重命名</Button>
+				<Button icon="ios-search" v-if="checkedCount" class="mr-2">删除</Button>
 				<Input class="ml-auto top-search" search enter-button placeholder="请输入关键词" />
 			</div>
 			<div class="top-select d-flex align-items-center">
@@ -102,32 +102,61 @@
 				}]
 			}
 		},
-		computed : {
-			checkList(){
-				return this.list.filter(item=>item.checked)
+		computed: {
+			checkList() {
+				return this.list.filter(item => item.checked)
 			},
-			checkedAllStatus(){
+			checkedAllStatus() {
 				return this.checkList.length === this.list.length
+			},
+			checkedCount() {
+				return this.checkList.length
 			}
 		},
-		methods : {
-			handleEvent(e){
-				console.log(e.value)
-				switch(e.type){
-					case "delete" :
-						this.list.splice(e.index,1);
+		methods: {
+			handleEvent(e) {
+				switch (e.type) {
+					case "delete":
+						this.list.splice(e.index, 1);
 						this.$Message.success("删除成功")
 						break;
 					case "checked":
-						this.list[e.index].checked=e.value
+						this.list[e.index].checked = e.value
 						break;
-					default :
+					case "rename" : 
+						this.rename(e.index)
+					default:
 						break;
 				}
 			},
-			checkAllChange(e){
-				this.list.map((item,index)=>{
+			//全选
+			checkAllChange(e) {
+				this.list.map((item, index) => {
 					item.checked = e
+				})
+			},
+			//重命名
+			rename(index = false){
+				let item = index !==false ?this.list[index] :  this.checkList[0]
+				let value = item.name
+				this.$Modal.confirm({
+					render: (h) => {
+						return h('Input', {
+							props: {
+								value: value,
+								autofocus: true,
+								placeholder: '请填写新名称...'
+							},
+							on: {
+								input: (val) => {
+									value= val;
+								}
+							}
+						})
+					},
+					onOk : ()=>{
+						item.name = value
+					}
 				})
 			}
 		}

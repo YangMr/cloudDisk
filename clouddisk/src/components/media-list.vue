@@ -16,7 +16,7 @@
 				<Dropdown>
 					<Icon type="ios-more" size="18" class="mx-2 icon" />
 					<DropdownMenu slot="list">
-						<DropdownItem>重命名</DropdownItem>
+						<DropdownItem @click.native="rename">重命名</DropdownItem>
 						<DropdownItem @click.native="deleteItem">删除</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
@@ -58,6 +58,11 @@
 			item: Object,
 			index: [Number, String]
 		},
+		data(){
+			return {
+				value : ""
+			}
+		},
 		computed: {
 			icon() {
 				let o = icons[this.item.type]
@@ -84,6 +89,13 @@
 					type : "checked",
 					index: this.index,
 					value : e
+				})
+			},
+			//重命名
+			rename() {
+				this.$emit("on-event",{
+					type : "rename",
+					index: this.index
 				})
 			}
 		}
