@@ -22,6 +22,10 @@
 		<div class="index-page d-flex align-items-center px-3 border-top">
 			<Page :total="100" show-sizer />
 		</div>
+		
+		<div class="d-none images" v-viewer>
+		    <img v-for="(src,index) in images" :src="src" :key="index">
+		</div>
 	</div>
 </template>
 
@@ -103,6 +107,15 @@
 			}
 		},
 		computed: {
+			images(){
+				let urls = [];
+				this.list.forEach((item,index)=>{
+					if(item.type === "image"){
+						urls.push(item.url)
+					}
+				})
+				return urls;
+			},
 			checkList() {
 				return this.list.filter(item => item.checked)
 			},
@@ -125,6 +138,13 @@
 						break;
 					case "rename" : 
 						this.rename(e.index)
+						break;
+					case "image" :
+						const viewer = this.$el.querySelector('.images').$viewer
+						let index =this.images.findIndex(url=>url === e.url)
+						viewer.view(index)
+						viewer.show()
+						break;
 					default:
 						break;
 				}

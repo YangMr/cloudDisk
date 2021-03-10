@@ -1,5 +1,5 @@
 <template>
-	<div class="border-bottom px-3 py-2 file-list">
+	<div class="border-bottom px-3 py-2 file-list" @click="clickEvent">
 		<Row>
 			<Col span="12" class="d-flex align-items-center">
 			<Checkbox @on-change="onChange" size="small"  class="mb-0 mr-3" :value="item.checked"></Checkbox>
@@ -97,6 +97,14 @@
 					type : "rename",
 					index: this.index
 				})
+			},
+			clickEvent(){
+				if(this.item.type === "image"){
+					this.$emit("on-event",{
+						type : "image",
+						url: this.item.url
+					})
+				}
 			}
 		}
 	}
