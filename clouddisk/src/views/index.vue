@@ -11,7 +11,7 @@
 				<Input class="ml-auto top-search" search enter-button placeholder="请输入关键词" />
 			</div>
 			<div class="top-select d-flex align-items-center">
-				<Checkbox size="small" @on-change="checkAllChange"><span class="ml-2">全选</span></Checkbox>
+				<Checkbox :value="checkedAllStatus" size="small" @on-change="checkAllChange"><span class="ml-2">全选</span></Checkbox>
 			</div>
 		</div>
 
@@ -102,23 +102,35 @@
 				}]
 			}
 		},
+		computed : {
+			checkList(){
+				return this.list.filter(item=>item.checked)
+			},
+			checkedAllStatus(){
+				return this.checkList.length === this.list.length
+			}
+		},
 		methods : {
 			handleEvent(e){
+				console.log(e.value)
 				switch(e.type){
 					case "delete" :
 						this.list.splice(e.index,1);
 						this.$Message.success("删除成功")
+						break;
+					case "checked":
+						this.list[e.index].checked=e.value
 						break;
 					default :
 						break;
 				}
 			},
 			checkAllChange(e){
-				console.log(e)
-				console.log("123")
+				this.list.map((item,index)=>{
+					item.checked = e
+				})
 			}
 		}
-		
 	}
 </script>
 
