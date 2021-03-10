@@ -2,7 +2,7 @@
 	<div class="border-bottom px-3 py-2 file-list">
 		<Row>
 			<Col span="12" class="d-flex align-items-center">
-			<Checkbox size="small" class="mb-0 mr-3" :value="item.checked"></Checkbox>
+			<Checkbox size="small"  class="mb-0 mr-3" :value="item.checked"></Checkbox>
 			<i class="iconfont mr-3" :class="icon" style="font-size:28px"></i>
 			<small>{{item.name}}</small>
 			<div class="ml-auto text-primary hide">

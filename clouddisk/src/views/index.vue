@@ -11,7 +11,7 @@
 				<Input class="ml-auto top-search" search enter-button placeholder="请输入关键词" />
 			</div>
 			<div class="top-select d-flex align-items-center">
-				<Checkbox size="small"><span class="ml-2">全选</span></Checkbox>
+				<Checkbox size="small" @on-change="checkAllChange"><span class="ml-2">全选</span></Checkbox>
 			</div>
 		</div>
 
@@ -112,6 +112,10 @@
 					default :
 						break;
 				}
+			},
+			checkAllChange(e){
+				console.log(e)
+				console.log("123")
 			}
 		}
 		
